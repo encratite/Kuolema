@@ -16,9 +16,9 @@ data ApplicationState = ApplicationState
 
 instance HasHeistState Application ApplicationState where
   getHeistState = templateState
-  setHeistState s a = a { templateState = s }
+  setHeistState wrappedState applicationState = applicationState { templateState = wrappedState }
 
-  applicationInitialisation :: Initializer ApplicationState
-  applicationInitialisation = do
-    heist <- heistInitializer templateState
-    return $ ApplicationState heist
+applicationInitialisation :: Initializer ApplicationState
+applicationInitialisation = do
+  heist <- heistInitializer templatePath
+  return $ ApplicationState heist

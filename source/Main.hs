@@ -1,4 +1,5 @@
-{-# LANGUAGE CPP TemplateHaskell #-}
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 module Main where
 
