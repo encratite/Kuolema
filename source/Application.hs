@@ -3,6 +3,9 @@ module Application
        , applicationInitialisation
        ) where
 
+import Data.IORef
+import Control.Monad.Trans
+
 import Snap.Extension
 import Snap.Extension.Heist.Impl
 
@@ -11,7 +14,8 @@ import Configuration
 type Application = SnapExtend ApplicationState
 
 data ApplicationState = ApplicationState
-                        { templateState :: HeistState Application
+                        { templateState :: HeistState Application,
+                          counter :: IORef Int
                         }
 
 instance HasHeistState Application ApplicationState where
@@ -21,4 +25,5 @@ instance HasHeistState Application ApplicationState where
 applicationInitialisation :: Initializer ApplicationState
 applicationInitialisation = do
   heist <- heistInitializer templatePath
-  return $ ApplicationState heist
+  newCounter <- liftIO $ newIORef 0
+  return $ ApplicationState heist newCounter

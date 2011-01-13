@@ -17,7 +17,7 @@ import Snap.Types
 import Application
 
 testSplice :: Splice Application
-testSplice = return [X.Text $ B.pack $ show (1::Int)]
+testSplice = return [X.Text $ B.pack $ show $ liftIO $ readIORef counter]
 
 index :: Application ()
 index = ifTop $ heistLocal (bindSplices splices) $ render "index"

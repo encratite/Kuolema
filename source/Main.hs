@@ -18,6 +18,6 @@ main :: IO ()
 main = quickHttpServe applicationInitialisation site
 #else
 main = do
-  snap <- $ (loadSnapTH 'applicationInitialisation 'site)
+  snap <- $(loadSnapTH 'applicationInitialisation 'site)
   quickHttpServe snap
 #endif
