@@ -1,6 +1,7 @@
 module Application
        ( Application
        , applicationInitialisation
+       , counter
        ) where
 
 import Data.IORef

@@ -4,6 +4,6 @@
     <title>Index</title>
   </head>
   <body>
-    <p>Hooray: <test/></p>
+    <p>Value: <test/></p>
   </body>
 </html>

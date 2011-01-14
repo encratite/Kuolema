@@ -5,6 +5,8 @@ module Site
        ) where
 
 import Control.Applicative
+import Data.IORef
+
 import Text.Templating.Heist
 
 import qualified Data.ByteString.Char8 as B
@@ -16,8 +18,14 @@ import Snap.Types
 
 import Application
 
+import Control.Monad.Reader
+
 testSplice :: Splice Application
-testSplice = return [X.Text $ B.pack $ show $ liftIO $ readIORef counter]
+testSplice = do
+  reference <- asks counter
+  value <- liftIO $ readIORef reference
+  liftIO $ writeIORef reference (value + 1)
+  return [X.Text $ B.pack $ show $ value]
 
 index :: Application ()
 index = ifTop $ heistLocal (bindSplices splices) $ render "index"
