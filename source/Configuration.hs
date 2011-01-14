@@ -1,6 +1,12 @@
 module Configuration
-       ( templatePath
+       ( staticPath
+       , templatePath
        ) where
 
-templatePath :: [Char]
+type Path = [Char]
+
+staticPath :: Path
+staticPath = "static"
+
+templatePath :: Path
 templatePath = "template"
